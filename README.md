@@ -15,6 +15,9 @@ React Native, Expo 활용한 심플 일기 앱
 - Expo XDE
 - X CODE IOS Simulator
 
+## React Navigator
+- [React Navigator](https://reactnavigation.org/docs/intro/quick-start)
+
 ## 참고자료
 - [React Native APIs](http://facebook.github.io/react-native/releases/0.49/docs/accessibilityinfo.html)
 - [Quick Start | Expo latest documentation](https://docs.expo.io/versions/latest/index.html)
