@@ -1,12 +1,32 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, StyleSheet, Image, Text } from 'react-native';
+import { TabNavigator } from 'react-navigation';
+import Home from './pages/Home'
+import Diary from './pages/Diary'
+import Setting from './pages/Setting'
 
-import Main from './pages/Main'
 
-export default class App extends React.Component {
-  render() {
-    return (
-        <Main />
-    );
-  }
-}
+const App = TabNavigator({
+  Home: {
+    screen: Home,
+  },
+  Diary: {
+    screen: Diary,
+  },
+  Setting: {
+    screen: Setting,
+  },
+}, {
+  tabBarPosition: 'bottom',
+  swipeEnabled: true,
+  animationEnabled: true,
+  tabBarOptions: {
+    activeTintColor: '#3956ff',
+    showLabel: false,
+    style: {
+      backgroundColor: 'transparent',
+    },
+  },
+});
+
+export default App;
