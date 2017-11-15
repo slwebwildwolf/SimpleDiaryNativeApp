@@ -1,17 +1,17 @@
 import React from 'react';
 import { View, StyleSheet, Image, Text } from 'react-native';
 import { TabNavigator } from 'react-navigation';
-import Home from './pages/Home'
 import Diary from './pages/Diary'
+import Write from './pages/Write'
 import Setting from './pages/Setting'
 
 
 const App = TabNavigator({
-  Home: {
-    screen: Home,
-  },
   Diary: {
     screen: Diary,
+  },
+  Write: {
+    screen: Write,
   },
   Setting: {
     screen: Setting,
@@ -25,6 +25,8 @@ const App = TabNavigator({
     showLabel: false,
     style: {
       backgroundColor: 'transparent',
+      borderTopWidth: 0,
+      paddingBottom: 20
     },
   },
 });
