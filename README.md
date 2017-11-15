@@ -11,12 +11,16 @@ React Native, Expo 활용한 심플 일기 앱
 - React를 활용한 Native App 구현을 통해 React 복습 겸, 웹 브라우저 밖의 세상에 대한 공부
 
 ## 작업도구
+- VS CODE
 - React Native
 - Expo XDE
 - X CODE IOS Simulator
 
 ## React Navigator
 - [React Navigator](https://reactnavigation.org/docs/intro/quick-start)
+- React Native TabNavigation 적용
+- [React Native Navigation Demo 확인 페이지](https://expo.io/@react-navigation/NavigationPlayground)
+  - iPhone에 Expo App설치 후, 위 페이지에서 접속 후 React Native Navigation Demo 직접 시연 가능 
 
 ## 참고자료
 - [React Native APIs](http://facebook.github.io/react-native/releases/0.49/docs/accessibilityinfo.html)
