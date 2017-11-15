@@ -1,6 +1,8 @@
 import React from 'react';
 import { StyleSheet, Image, View, Text } from 'react-native';
+import style from '../style'
 
+const styles = StyleSheet.create(style);
 
 export default class Diary extends React.Component {
   static navigationOptions = {
@@ -21,10 +23,3 @@ export default class Diary extends React.Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  icon: {
-    width: 26,
-    height: 26,
-  },
-});
