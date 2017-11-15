@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Image, View, Text } from 'react-native';
 import style from './Style'
 
-const styles = StyleSheet.create(style);
+const styles = StyleSheet.create(style.commonStyle);
 
 export default class Setting extends React.Component {
   static navigationOptions = {
