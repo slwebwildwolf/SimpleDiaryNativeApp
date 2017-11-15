@@ -21,7 +21,7 @@ const App = TabNavigator({
   swipeEnabled: true,
   animationEnabled: true,
   tabBarOptions: {
-    activeTintColor: '#3956ff',
+    activeTintColor: '#FF5733',
     showLabel: false,
     style: {
       backgroundColor: 'transparent',
