@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Image, View, Text } from 'react-native';
-import style from '../style'
+import style from './Style'
 
 const styles = StyleSheet.create(style);
 
@@ -17,8 +17,8 @@ export default class Setting extends React.Component {
 
   render() {
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Setting</Text>
+      <View style={styles.container}>
+        <Text style={styles.title}>당신에게 가장 잘 맞는 설정은 무엇인가요?</Text>
       </View>
     );
   }
