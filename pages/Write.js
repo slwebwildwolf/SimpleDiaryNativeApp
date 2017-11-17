@@ -1,23 +1,23 @@
 import React from 'react';
-import { StyleSheet, Image, View, Text, TextInput } from 'react-native';
+import { StyleSheet, Image, View, Text, TextInput, Checkbox, Button, AsyncStorage } from 'react-native';
+import CheckBox from 'react-native-checkbox';
 import axios from 'axios'
+
 import style from './Style'
 
+const styles = StyleSheet.create(style.commonStyle);
+const writeStyles = StyleSheet.create(style.writeStyle);
 const WEATHER_APP_KEY = '8e910f9c-3965-3d3c-91aa-dda9db46227f';
 
-const styles = StyleSheet.create(style.commonStyle);
 
 export default class Write extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      text: '',
+      title: '',
+      article: '',
       skyData: [],
-      geoData: {
-        lat: '',
-        lot: '',
-
-      },
+      geoData: {lat: '', lot: ''},
     };
   }
 
@@ -32,7 +32,32 @@ export default class Write extends React.Component {
   };
 
   componentDidMount() {
-    axios.get(`http://apis.skplanetx.com/weather/current/minutely?version=1&lat=37&lon=127`, {
+    this._getCurrentGeolocation()
+  }
+  
+  _getCurrentGeolocation = () => {
+    navigator.geolocation.getCurrentPosition( success = (position) => {
+      let lat = position.coords.latitude
+      let lot = position.coords.longitude
+      console.log(position.coords.latitude, position.coords.longitude)
+      // this._getWeatherInfoFromApi(lat, lot)
+    });
+    // const options = {
+    //   enableHighAccuracy: true, timeout: 20000, maximumAge: 1000
+    // };
+    // error = (err) => {
+    //   console.warn(`ERROR(${err.code}): ${err.message}`);
+    // };
+  }
+
+  _getWeatherInfoFromApi = (latitude, longitude) => {
+    this.setState({
+      geoData: {
+        lat: latitude,
+        lot: longitude,
+      }
+    })
+    axios.get(`http://apis.skplanetx.com/weather/current/minutely?version=1&lat=${latitude}&lon=${longitude}`, {
       headers: {
         appKey: WEATHER_APP_KEY,
       }
@@ -40,30 +65,77 @@ export default class Write extends React.Component {
     .then(res => {
       this.setState({
         skyData: res.data.weather.minutely[0].sky,
-        geoData: {
-          lat: res.data.weather.minutely[0].station.latitude,
-          lot: res.data.weather.minutely[0].station.longitude,
-        }
       })
     })
     .catch(error => {
       console.error(error)
     })
   }
-  
+
+  _conditionCheckHandle = (value, checked) => {
+    console.log(value, checked)
+  }
+
+  _setDataToAsyncStorage = (e) => {
+    if (e.target === 83){
+      console.log('임시저장 버튼 클릭')
+    } else if (e.target === 87) {
+      console.log('일기 작성완료 버튼 클릭')
+    }
+    // AsyncStorage.setItem('@MySuperStore:key', 'I like to save it.');
+  }
 
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.title}>오늘, 당신의 하루는?</Text>
         <TextInput
-          style={styles.textInput}
-          onChangeText={(text) => this.setState({text})}
           editable = {true}
-          value={this.state.text}
+          onChangeText={(title) => this.setState({title})}
+          value={this.state.title}
+          placeholder={'당신의 오늘을 한 줄로 적어주세요.'}
+          style={{width: '90%', height: 40, borderBottomWidth: 1, borderBottomColor: '#FF5733', color: '#888', fontSize: 13}}
         />
-        <Text>{this.state.skyData.name}</Text>
-        <Text>{this.state.geoData.lat}{this.state.geoData.lot}</Text>
+        <TextInput
+          style={styles.textInput}
+          onChangeText={(article) => this.setState({article})}
+          editable = {true}
+          placeholder={'오늘은 어떤 일이 있었는지 적어주세요.'}
+          value={this.state.article}
+          multiline = {true}
+          numberOfLines = {10}
+          maxHeight = {300}
+        />
+        <View style={{marginTop: 16, display: 'flex', flex: 1, width: '90%'}}>
+          <CheckBox
+            label='행복해'
+            onChange={(checked) => console.log('I am checked', checked)}
+            value='happy'
+          />
+          <CheckBox
+            label='우울해'
+            onChange={(checked) => console.log('I am checked', checked)}
+            value='gloomy'
+          />
+          <CheckBox
+            label='심란해'
+            onChange={(checked) => console.log('I am checked', checked)}
+            value='confuse'
+          />
+          <Button
+            onPress={e => this._setDataToAsyncStorage(e)}
+            title="임시저장"
+            color="#ccc"
+            accessibilityLabel="임시저장 하시겠습니까?"
+            
+          />
+          <Button
+            onPress={e => this._setDataToAsyncStorage(e)}
+            title="일기 작성완료"
+            color="#FF5733"
+            accessibilityLabel="작성된 일기를 저장 하시겠습니까?"
+          />
+        </View>
       </View>
     );
   }
