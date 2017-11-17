@@ -13,9 +13,16 @@ const style = {
     },
     textInput: {
       width: '90%',
-      height: '70%',
-      borderRadius: 10,
-      backgroundColor: '#f8f8f8',
+      height: 300,
+      borderTopWidth: 1,
+      borderTopColor: "#efefef",
+      borderBottomWidth: 1,
+      borderBottomColor: "#efefef",
+      color: '#888',
+      paddingTop: 16,
+      paddingBottom: 16,
+      fontSize: 13,
+      lineHeight: 16,
     },
     icon: {
       width: 20,
@@ -40,6 +47,13 @@ const style = {
       fontSize: 12,
       fontWeight: '300',
       color: '#ccc',
+    }
+  },
+  writeStyle: {
+    infos: {
+      color: '#888',
+      fontSize: 11,
+      fontWeight: '500'
     }
   }
 };
