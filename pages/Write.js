@@ -40,14 +40,7 @@ export default class Write extends React.Component {
       let lat = position.coords.latitude
       let lot = position.coords.longitude
       console.log(position.coords.latitude, position.coords.longitude)
-      // this._getWeatherInfoFromApi(lat, lot)
     });
-    // const options = {
-    //   enableHighAccuracy: true, timeout: 20000, maximumAge: 1000
-    // };
-    // error = (err) => {
-    //   console.warn(`ERROR(${err.code}): ${err.message}`);
-    // };
   }
 
   _getWeatherInfoFromApi = (latitude, longitude) => {
@@ -82,7 +75,6 @@ export default class Write extends React.Component {
     } else if (e.target === 87) {
       console.log('일기 작성완료 버튼 클릭')
     }
-    // AsyncStorage.setItem('@MySuperStore:key', 'I like to save it.');
   }
 
   render() {
@@ -127,7 +119,6 @@ export default class Write extends React.Component {
             title="임시저장"
             color="#ccc"
             accessibilityLabel="임시저장 하시겠습니까?"
-            
           />
           <Button
             onPress={e => this._setDataToAsyncStorage(e)}
