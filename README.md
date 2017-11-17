@@ -1,5 +1,6 @@
 # DiaryApp
-React Native, Expo 활용한 심플 일기 앱
+React Native, Expo 활용한 심플 일기 앱  
+> [제작 일지](https://vezzita.github.io/categories/React/React-Native/)
 
 ## 최소기능구현
 - React Native를 활용한 ios native app 제작
