@@ -1,5 +1,7 @@
 import React from 'react';
 import { StyleSheet, Image, View, Text } from 'react-native';
+import store from '../stores/Store'
+import { observer } from 'mobx-react'
 import style from './Style'
 
 const styles = StyleSheet.create(style.commonStyle);
@@ -17,6 +19,7 @@ const dummyData = [
   }
 ]
 
+@observer
 export default class Diary extends React.Component {
   static navigationOptions = {
     tabBarLabel: 'Diary',
@@ -30,7 +33,7 @@ export default class Diary extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={styles.container} store={store}>
         <Text style={styles.title}>추억더미</Text>
         {dummyData.map((item, index) => (
           <View 

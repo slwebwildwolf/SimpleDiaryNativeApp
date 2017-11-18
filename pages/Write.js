@@ -1,6 +1,8 @@
 import React from 'react';
-import { StyleSheet, Image, View, Text, TextInput, Checkbox, Button, AsyncStorage } from 'react-native';
+import { StyleSheet, Image, View, Text, TextInput, Button, AsyncStorage, Picker } from 'react-native';
 import CheckBox from 'react-native-checkbox';
+import { observer } from 'mobx-react'
+import store from '../stores/Store'
 import axios from 'axios'
 
 import style from './Style'
@@ -10,7 +12,8 @@ const writeStyles = StyleSheet.create(style.writeStyle);
 const WEATHER_APP_KEY = '8e910f9c-3965-3d3c-91aa-dda9db46227f';
 
 
-export default class Write extends React.Component {
+@observer
+class Write extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
@@ -18,6 +21,7 @@ export default class Write extends React.Component {
       article: '',
       skyData: [],
       geoData: {lat: '', lot: ''},
+      language: '',
     };
   }
 
@@ -30,6 +34,14 @@ export default class Write extends React.Component {
       />
     ),
   };
+
+  _createArticle() {
+    // const { title, article } = this.state;
+    // console.log('실행', title, article)
+    // console.log(this.state.title, this.state.article)
+    // this.props.store.createArticle(title, article)
+    console.log(this.props.store.title)
+  }
 
   componentDidMount() {
     this._getCurrentGeolocation()
@@ -78,8 +90,9 @@ export default class Write extends React.Component {
   }
 
   render() {
+    console.log(this.state.article, this.state.title)
     return (
-      <View style={styles.container}>
+      <View style={styles.container} stroe={store}>
         <Text style={styles.title}>오늘, 당신의 하루는?</Text>
         <TextInput
           editable = {true}
@@ -104,16 +117,7 @@ export default class Write extends React.Component {
             onChange={(checked) => console.log('I am checked', checked)}
             value='happy'
           />
-          <CheckBox
-            label='우울해'
-            onChange={(checked) => console.log('I am checked', checked)}
-            value='gloomy'
-          />
-          <CheckBox
-            label='심란해'
-            onChange={(checked) => console.log('I am checked', checked)}
-            value='confuse'
-          />
+
           <Button
             onPress={e => this._setDataToAsyncStorage(e)}
             title="임시저장"
@@ -121,13 +125,16 @@ export default class Write extends React.Component {
             accessibilityLabel="임시저장 하시겠습니까?"
           />
           <Button
-            onPress={e => this._setDataToAsyncStorage(e)}
+            onPress={this._createArticle.bind(this)}
             title="일기 작성완료"
             color="#FF5733"
             accessibilityLabel="작성된 일기를 저장 하시겠습니까?"
           />
+
         </View>
       </View>
     );
   }
 }
+
+export default Write;
